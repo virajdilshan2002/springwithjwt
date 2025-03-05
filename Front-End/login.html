@@ -43,10 +43,12 @@
                     "role": "USER"
                 }),
                 success: function(response) {
-                    console.log(response)
-                    alert('User logged in successfully');
                     window.localStorage.setItem('token', response.data.token);
-                    // window.location.href = 'home.html';
+                    if (response.data.user.role === "ADMIN"){
+                        window.location.href = 'admin.html';
+                    }else {
+                        window.location.href = 'user.html';
+                    }
                 },
                 error: function (error) {
                     console.log(error)

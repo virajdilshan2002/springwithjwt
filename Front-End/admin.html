@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Page</title>
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<button id="logOutBtn" class="btn bg-danger text-white position-absolute" style="right: 10px; top: 10px">Logout</button>
+
+<!-- Admin Header -->
+<div class="container mt-5">
+    <div class="card text-center shadow-sm">
+        <div class="card-body">
+            <h3 class="fw-bold">Welcome to Admin</h3>
+            <p class="text-muted">Manage your store efficiently</p>
+        </div>
+    </div>
+
+    <!-- Options Section -->
+    <div class="mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Options</h5>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
+                    + Add Item
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Adding Item -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="itemForm">
+                    <div class="mb-3">
+                        <label for="itemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="itemName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemPrice" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="itemPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemQty" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="itemQty" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="itemCategory" class="form-label">Category</label>
+                        <select class="form-select" id="itemCategory">
+                            <option value="">Select category</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="grocery">Grocery</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="bootstrap/bootstrap.bundle.min.js"></script>
+<script src="jq/jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function (){
+        $('#logOutBtn').click(function (){
+            window.localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        });
+
+        /*$('#itemForm').submit(function (e){
+            e.preventDefault();
+            let itemName = $('#itemName').val();
+            let itemPrice = $('#itemPrice').val();
+            let itemQty = $('#itemQty').val();
+            let itemCategory = $('#itemCategory').val();
+
+            $.ajax({
+                url: 'http://localhost:8082/api/v1/items',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+                },
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "name": itemName,
+                    "price": itemPrice,
+                    "quantity": itemQty,
+                    "category": itemCategory
+                }),
+                success: function(response) {
+                    alert('Item added successfully');
+                    $('#addItemModal').modal('hide');
+                },
+                error: function (error) {
+                    console.log(error)
+                    alert('Something went wrong!')
+                }
+            });
+        });*/
+    })
+</script>
+</body>
+</html>
